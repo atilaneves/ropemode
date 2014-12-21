@@ -5,6 +5,7 @@ from rope.base import libutils, utils, exceptions
 from rope.contrib import codeassist, generate, autoimport, findit
 
 from ropemode import refactor, decorators, dialog
+import collections
 
 
 class RopeMode(object):
@@ -24,7 +25,7 @@ class RopeMode(object):
     def _init_mode(self):
         for attrname in dir(self):
             attr = getattr(self, attrname)
-            if not callable(attr):
+            if not isinstance(attr, collections.Callable):
                 continue
             kind = getattr(attr, 'kind', None)
             if kind == 'local':
@@ -300,7 +301,7 @@ class RopeMode(object):
         if modules:
             for i in range(len(modules)):
                 modname = modules[i]
-                if not isinstance(modname, basestring):
+                if not isinstance(modname, str):
                     modname = modname.value()
                 modnames.append(modname)
         else:
@@ -351,7 +352,7 @@ class RopeMode(object):
         if len(result) == 1:
             resource = list(result.keys())[0]
         else:
-            resource = self._ask_file(result.keys())
+            resource = self._ask_file(list(result.keys()))
         if resource:
             self._goto_location(resource, result[resource])
 
@@ -505,7 +506,7 @@ class RopeMode(object):
         if isinstance(changes, rope.base.change.MoveResource):
             result[changes.resource] = changes.new_resource
         if undo:
-            return dict([(value, key) for key, value in result.items()])
+            return dict([(value, key) for key, value in list(result.items())])
         return result
 
     def _save_buffers(self, only_current=False):
@@ -582,7 +583,7 @@ class _CodeAssist(object):
             self._starting = common_start
             self._offset = self.starting_offset + len(common_start)
         prompt = 'Completion for %s: ' % self.expression
-        proposals = map(self.env._completion_data, proposals)
+        proposals = list(map(self.env._completion_data, proposals))
         result = self.env.ask_completion(prompt, proposals, self.starting)
         if result is not None:
             self._apply_assist(result)
