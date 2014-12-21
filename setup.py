@@ -1,7 +1,7 @@
 extra_kwargs = {}
 try:
     from setuptools import setup
-    extra_kwargs['install_requires'] = ['rope >= 0.9.4']
+    extra_kwargs['install_requires'] = ['rope_py3k >= 0.9.4']
 except ImportError:
     from distutils.core import setup
 
@@ -32,4 +32,3 @@ setup(name='ropemode',
       requires=['rope (>= 0.9.4)'],
       **extra_kwargs
 )
-
