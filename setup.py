@@ -8,7 +8,7 @@ except ImportError:
 import ropemode
 
 
-classifiers=[
+classifiers = [
     'Development Status :: 4 - Beta',
     'Operating System :: OS Independent',
     'Environment :: X11 Applications',
@@ -20,15 +20,15 @@ classifiers=[
     'Programming Language :: Python',
     'Topic :: Software Development']
 
-setup(name='ropemode',
+setup(name='ropemode_py3k',
       version=ropemode.VERSION,
       description=ropemode.INFO,
-      author='Ali Gholami Rudi',
-      author_email='aligrudi@users.sourceforge.net',
-      url='http://rope.sf.net/',
-      packages=['ropemode'],
+      author='Atila Neves',
+      author_email='',
+      url='https://github.com/atilaneves/ropemode',
+      packages=['ropemode_py3k'],
       license='GNU GPL',
       classifiers=classifiers,
-      requires=['rope (>= 0.9.4)'],
+      requires=['rope_py3k (>= 0.9.4)'],
       **extra_kwargs
-)
+      )
