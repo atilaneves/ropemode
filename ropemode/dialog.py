@@ -34,12 +34,12 @@ class Boolean(Data):
 def show_dialog(askdata, actions, confs={}, optionals={}, initial_asking=True):
     result = {}
     if initial_asking:
-        for name, conf in confs.items():
+        for name, conf in list(confs.items()):
             result[name] = askdata(conf)
     actions.append('batchset')
     names = list(actions)
-    names.extend(optionals.keys())
-    names.extend(confs.keys())
+    names.extend(list(optionals.keys()))
+    names.extend(list(confs.keys()))
     base_question = Data('Choose what to do: ',
                          default=actions[0], values=names)
     batchset_question = Data('Batch sets: ')
@@ -49,7 +49,7 @@ def show_dialog(askdata, actions, confs={}, optionals={}, initial_asking=True):
             response = base_question.default
         elif response == 'batchset':
             sets = askdata(batchset_question)
-            for key, value in _parse_batchset(sets).items():
+            for key, value in list(_parse_batchset(sets).items()):
                 if key.endswith(':'):
                     key = key[:-1]
                 if key in names:

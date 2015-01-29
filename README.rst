@@ -1,6 +1,3 @@
-
-**Note:** *Please note that this project has been moved to* `GitHub python-rope / ropemode`_
+A Python3 port of the original rope-mode:
 
 .. _GitHub python-rope / ropemode: https://github.com/python-rope/ropemode
-
-
